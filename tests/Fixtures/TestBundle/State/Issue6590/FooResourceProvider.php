@@ -52,6 +52,7 @@ class FooResourceProvider implements ProviderInterface
 
         foreach ($entity->getBars() as $barEntity) {
             $barResource = new BarResource();
+            $barResource->id = $barEntity->getId();
             $barResource->name = $barEntity->getName();
             $resource->bars[] = $barResource;
         }

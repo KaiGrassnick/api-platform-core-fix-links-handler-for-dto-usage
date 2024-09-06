@@ -683,11 +683,11 @@ Feature: GraphQL query support
     When I send the following GraphQL request:
     """
     {
-      issue6590Foo {
+      issue6590Foos {
         edges {
           node {
             id
-            bar {
+            bars {
               edges {
                 node {
                   name
@@ -706,17 +706,25 @@ Feature: GraphQL query support
     """
     {
       "data": {
-        "issue6590foo": {
-          "id": "/issue6590_foos/1",
+        "issue6590foos": {
           "edges": [
             {
               "node": {
-                "name": "bar1"
-              }
-            },
-            {
-              "node": {
-                "name": "bar2"
+                "id": "/issue6590_foos/1",
+                "bars: {
+                  "edges": [
+                    {
+                      "node": {
+                        "name": "bar1"
+                      }
+                    },
+                    {
+                      "node": {
+                        "name": "bar2"
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
