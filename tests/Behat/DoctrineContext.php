@@ -2325,6 +2325,27 @@ final class DoctrineContext implements Context
         $this->manager->flush();
     }
 
+    /**
+     * @Given there is an issue6590 foo object with 2 bar sub objects
+     */
+    public function thereIsAIssue6590DtoFooObjectWith2BarSubObjects(): void
+    {
+        $foo = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo();
+        $this->manager->persist($foo);
+
+        $bar1 = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar();
+        $bar1->setName('bar1');
+        $bar1->setFoo($foo);
+        $this->manager->persist($bar1);
+
+        $bar2 = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar();
+        $bar2->setName('bar2');
+        $bar2->setFoo($foo);
+        $this->manager->persist($bar2);
+
+        $this->manager->flush();
+    }
+
     private function isOrm(): bool
     {
         return null !== $this->schemaTool;
