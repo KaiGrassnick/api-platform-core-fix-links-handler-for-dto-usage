@@ -678,7 +678,7 @@ Feature: GraphQL query support
     And the header "Content-Type" should be equal to "application/json"
     And the JSON node "data.getSecurityAfterResolver.name" should be equal to "test"
 
-  Scenario: Retrieve an item with a subResource collection within an DTO using stateOptions entityClass through a GraphQL query
+  Scenario: Retrieve an item with a subResource collection within an DTO using stateOptions entityClass with an GraphQL query
     Given there is an issue6590 foo object with 2 bar sub objects
     When I send the following GraphQL request:
     """
