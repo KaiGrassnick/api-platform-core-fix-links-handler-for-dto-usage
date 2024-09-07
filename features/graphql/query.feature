@@ -683,16 +683,12 @@ Feature: GraphQL query support
     When I send the following GraphQL request:
     """
     {
-      issue6590Foos {
-        edges {
-          node {
-            id
-            bars {
-              edges {
-                node {
-                  name
-                }
-              }
+      issue6590Foo(id: "/issue6590_foos/1") {
+        id
+        bars {
+          edges {
+            node {
+              name
             }
           }
         }
@@ -706,28 +702,22 @@ Feature: GraphQL query support
     """
     {
       "data": {
-        "issue6590foos": {
-          "edges": [
-            {
-              "node": {
-                "id": "/issue6590_foos/1",
-                "bars: {
-                  "edges": [
-                    {
-                      "node": {
-                        "name": "bar1"
-                      }
-                    },
-                    {
-                      "node": {
-                        "name": "bar2"
-                      }
-                    }
-                  ]
+        "issue6590Foo": {
+          "id": "/issue6590_foos/1",
+          "bars": {
+            "edges": [
+              {
+                "node": {
+                  "name": "bar1"
+                }
+              },
+              {
+                "node": {
+                  "name": "bar2"
                 }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }

@@ -205,6 +205,10 @@ use ApiPlatform\Tests\Fixtures\TestBundle\Entity\User;
 use ApiPlatform\Tests\Fixtures\TestBundle\Entity\UuidIdentifierDummy;
 use ApiPlatform\Tests\Fixtures\TestBundle\Entity\VideoGame;
 use ApiPlatform\Tests\Fixtures\TestBundle\Entity\WithJsonDummy;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo as Issue6590FooDummy;
+use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Foo as Issue6590FooDummyDocument;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar as Issue6590BarDummy;
+use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Bar as Issue6590BarDummyDocument;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -2330,15 +2334,15 @@ final class DoctrineContext implements Context
      */
     public function thereIsAIssue6590DtoFooObjectWith2BarSubObjects(): void
     {
-        $foo = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo();
+        $foo = $this->buildIssue6590FooDummy();
         $this->manager->persist($foo);
 
-        $bar1 = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar();
+        $bar1 = $this->buildIssue6590BarDummy();
         $bar1->setName('bar1');
         $bar1->setFoo($foo);
         $this->manager->persist($bar1);
 
-        $bar2 = new \ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar();
+        $bar2 = $this->buildIssue6590BarDummy();
         $bar2->setName('bar2');
         $bar2->setFoo($foo);
         $this->manager->persist($bar2);
@@ -2724,5 +2728,15 @@ final class DoctrineContext implements Context
     private function buildLinkHandledDummy(string $slug): LinkHandledDummy|LinkHandledDummyDocument
     {
         return $this->isOrm() ? new LinkHandledDummy($slug) : new LinkHandledDummyDocument($slug);
+    }
+
+    private function buildIssue6590FooDummy(): Issue6590FooDummy|Issue6590FooDummyDocument
+    {
+        return $this->isOrm() ? new Issue6590FooDummy() : new Issue6590FooDummyDocument();
+    }
+
+    private function buildIssue6590BarDummy(): Issue6590BarDummy|Issue6590BarDummyDocument
+    {
+        return $this->isOrm() ? new Issue6590BarDummy() : new Issue6590BarDummyDocument();
     }
 }
