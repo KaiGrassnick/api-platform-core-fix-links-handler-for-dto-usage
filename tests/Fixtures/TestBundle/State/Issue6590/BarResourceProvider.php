@@ -19,7 +19,8 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
 use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\BarResource;
-use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar as BarEntity;
+use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Bar as BarDocument;
 
 class BarResourceProvider implements ProviderInterface
 {
@@ -54,7 +55,7 @@ class BarResourceProvider implements ProviderInterface
 
     }
 
-    protected function getResource(Bar $entity): BarResource
+    protected function getResource(BarEntity|BarDocument $entity): BarResource
     {
         $resource = new BarResource();
         $resource->id = $entity->getId();

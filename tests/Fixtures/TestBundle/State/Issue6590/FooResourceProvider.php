@@ -20,7 +20,8 @@ use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
 use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\BarResource;
 use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\FooResource;
-use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo as FooEntity;
+use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Foo as FooDocument;
 
 class FooResourceProvider implements ProviderInterface
 {
@@ -54,7 +55,7 @@ class FooResourceProvider implements ProviderInterface
         return $this->getResource($entity);
     }
 
-    protected function getResource(Foo $entity): FooResource
+    protected function getResource(FooEntity|FooDocument $entity): FooResource
     {
         $resource = new FooResource();
         $resource->id = $entity->getId();
