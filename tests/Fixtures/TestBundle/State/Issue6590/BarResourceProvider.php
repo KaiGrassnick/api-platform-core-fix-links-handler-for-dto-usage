@@ -18,9 +18,7 @@ use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
-use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OdmBarResource;
 use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OrmBarResource;
-use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Bar as BarDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Bar as BarEntity;
 
 class BarResourceProvider implements ProviderInterface
@@ -55,9 +53,9 @@ class BarResourceProvider implements ProviderInterface
         return $this->getResource($entity);
     }
 
-    protected function getResource(BarEntity|BarDocument $entity): OdmBarResource|OrmBarResource
+    protected function getResource(BarEntity $entity): OrmBarResource
     {
-        $resource = ($entity instanceof BarEntity) ? new OrmBarResource() : new OdmBarResource();
+        $resource = new OrmBarResource();
         $resource->id = $entity->getId();
         $resource->name = $entity->getName();
 

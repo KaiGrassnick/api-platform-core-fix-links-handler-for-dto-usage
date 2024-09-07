@@ -63,8 +63,6 @@ use ApiPlatform\Tests\Fixtures\TestBundle\Document\FourthLevel as FourthLevelDoc
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\Greeting as GreetingDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\InitializeInput as InitializeInputDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\IriOnlyDummy as IriOnlyDummyDocument;
-use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Bar as Issue6590BarDummyDocument;
-use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Foo as Issue6590FooDummyDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\LinkHandledDummy as LinkHandledDummyDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\MaxDepthDummy as MaxDepthDummyDocument;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\MultiRelationsDummy as MultiRelationsDummyDocument;
@@ -2334,15 +2332,15 @@ final class DoctrineContext implements Context
      */
     public function thereIsAIssue6590DtoFooObjectWith2BarSubObjects(): void
     {
-        $foo = $this->buildIssue6590FooDummy();
+        $foo = new Issue6590FooDummy();
         $this->manager->persist($foo);
 
-        $bar1 = $this->buildIssue6590BarDummy();
+        $bar1 = new Issue6590BarDummy();
         $bar1->setName('bar1');
         $bar1->setFoo($foo);
         $this->manager->persist($bar1);
 
-        $bar2 = $this->buildIssue6590BarDummy();
+        $bar2 = new Issue6590BarDummy();
         $bar2->setName('bar2');
         $bar2->setFoo($foo);
         $this->manager->persist($bar2);
@@ -2728,15 +2726,5 @@ final class DoctrineContext implements Context
     private function buildLinkHandledDummy(string $slug): LinkHandledDummy|LinkHandledDummyDocument
     {
         return $this->isOrm() ? new LinkHandledDummy($slug) : new LinkHandledDummyDocument($slug);
-    }
-
-    private function buildIssue6590FooDummy(): Issue6590FooDummy|Issue6590FooDummyDocument
-    {
-        return $this->isOrm() ? new Issue6590FooDummy() : new Issue6590FooDummyDocument();
-    }
-
-    private function buildIssue6590BarDummy(): Issue6590BarDummy|Issue6590BarDummyDocument
-    {
-        return $this->isOrm() ? new Issue6590BarDummy() : new Issue6590BarDummyDocument();
     }
 }
