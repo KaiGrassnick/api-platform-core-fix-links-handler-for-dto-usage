@@ -23,8 +23,8 @@ class Foo
     #[ODM\Id(type: 'int', strategy: 'INCREMENT')]
     private int $id;
 
-    #[ODM\ReferenceMany(nullable: true, storeAs: 'id', targetDocument: Bar::class)]
-    private Collection $bars;
+    #[ODM\ReferenceMany(nullable: true, targetDocument: Bar::class, mappedBy: 'foo')]
+    private Collection|iterable $bars;
 
     public function __construct()
     {
