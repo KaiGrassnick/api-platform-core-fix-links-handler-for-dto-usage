@@ -18,10 +18,12 @@ use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\Pagination\TraversablePaginator;
 use ApiPlatform\State\ProviderInterface;
-use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\BarResource;
-use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\FooResource;
-use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo as FooEntity;
+use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OdmBarResource;
+use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OdmFooResource;
+use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OrmBarResource;
+use ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590\OrmFooResource;
 use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Foo as FooDocument;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo as FooEntity;
 
 class FooResourceProvider implements ProviderInterface
 {
@@ -55,13 +57,13 @@ class FooResourceProvider implements ProviderInterface
         return $this->getResource($entity);
     }
 
-    protected function getResource(FooEntity|FooDocument $entity): FooResource
+    protected function getResource(FooEntity|FooDocument $entity): OrmFooResource|OdmFooResource
     {
-        $resource = new FooResource();
+        $resource = ($entity instanceof FooEntity) ? new OrmFooResource() : new OdmFooResource();
         $resource->id = $entity->getId();
 
         foreach ($entity->getBars() as $barEntity) {
-            $barResource = new BarResource();
+            $barResource = ($entity instanceof FooEntity) ? new OrmBarResource() : new OdmBarResource();
             $barResource->id = $barEntity->getId();
             $barResource->name = $barEntity->getName();
             $resource->bars[] = $barResource;

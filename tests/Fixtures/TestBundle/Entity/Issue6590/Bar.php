@@ -43,6 +43,7 @@ class Bar
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -54,6 +55,7 @@ class Bar
     public function setFoo(?Foo $foo): self
     {
         $this->foo = $foo;
+
         return $this;
     }
 }

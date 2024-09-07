@@ -13,41 +13,28 @@ declare(strict_types=1);
 
 namespace ApiPlatform\Tests\Fixtures\TestBundle\ApiResource\Issue6590;
 
-use ApiPlatform\Doctrine\Orm\State\Options;
+use ApiPlatform\Doctrine\Odm\State\Options;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GraphQl\Query;
 use ApiPlatform\Metadata\GraphQl\QueryCollection;
-use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Issue6590\Foo;
-use ApiPlatform\Tests\Fixtures\TestBundle\State\Issue6590\FooResourceProvider;
+use ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590\Bar;
+use ApiPlatform\Tests\Fixtures\TestBundle\State\Issue6590\BarResourceProvider;
 
 #[ApiResource(
-    shortName: 'Issue6590Foo',
+    shortName: 'Issue6590OdmBar',
     operations: [],
     graphQlOperations: [
         new Query(),
         new QueryCollection(),
     ],
-    provider: FooResourceProvider::class,
-    stateOptions: new Options(entityClass: Foo::class)
+    provider: BarResourceProvider::class,
+    stateOptions: new Options(documentClass: Bar::class)
 )]
-class FooResource
+class OdmBarResource
 {
     #[ApiProperty(identifier: true)]
     public int $id;
 
-    /**
-     * @var BarResource[]
-     */
-    public array $bars;
-
-    public function addBar(BarResource $bar): void
-    {
-        $this->bars[] = $bar;
-    }
-
-    public function removeBar(BarResource $bar): void
-    {
-        unset($this->bars[array_search($bar, $this->bars, true)]);
-    }
+    public string $name;
 }
