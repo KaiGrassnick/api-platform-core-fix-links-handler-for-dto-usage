@@ -49,10 +49,8 @@ class Foo
 
     /**
      * @param Collection<Bar> $bars
-     *
-     * @return Foo
      */
-    public function setBars(Collection $bars): Foo
+    public function setBars(Collection $bars): self
     {
         $this->bars = $bars;
 

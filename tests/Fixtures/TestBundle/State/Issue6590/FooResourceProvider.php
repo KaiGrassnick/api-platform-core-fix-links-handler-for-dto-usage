@@ -33,8 +33,8 @@ class FooResourceProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
         if ($operation instanceof CollectionOperationInterface) {
-            $entities  = $this->collectionProvider->provide($operation, $uriVariables, $context);
-            assert($entities instanceof Paginator);
+            $entities = $this->collectionProvider->provide($operation, $uriVariables, $context);
+            \assert($entities instanceof Paginator);
 
             $resources = [];
             foreach ($entities as $entity) {

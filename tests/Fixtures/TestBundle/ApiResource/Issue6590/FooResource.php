@@ -48,6 +48,6 @@ class FooResource
 
     public function removeBar(BarResource $bar): void
     {
-        unset($this->bars[array_search($bar, $this->bars)]);
+        unset($this->bars[array_search($bar, $this->bars, true)]);
     }
 }

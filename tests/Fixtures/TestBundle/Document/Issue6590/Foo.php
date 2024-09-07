@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ApiPlatform\Tests\Fixtures\TestBundle\Document\Issue6590;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 #[ODM\Document()]
 class Foo
@@ -46,10 +46,8 @@ class Foo
 
     /**
      * @param Collection<Bar> $bars
-     *
-     * @return Foo
      */
-    public function setBars(Collection $bars): Foo
+    public function setBars(Collection $bars): self
     {
         $this->bars = $bars;
 

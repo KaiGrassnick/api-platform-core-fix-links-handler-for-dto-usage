@@ -40,7 +40,7 @@ class Bar
         return $this->name;
     }
 
-    public function setName(string $name): Bar
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
@@ -51,7 +51,7 @@ class Bar
         return $this->foo;
     }
 
-    public function setFoo(?Foo $foo): Bar
+    public function setFoo(?Foo $foo): self
     {
         $this->foo = $foo;
         return $this;
